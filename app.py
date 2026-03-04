@@ -62,7 +62,7 @@ def get_soil_category(rtr_class):
     elif rtr_class in cat_V:
         return "V"
     else:
-        return "Unknown"
+        return "Non valide"
 
 
 def get_sti_class(soil_cat, climate, water_table_dist, drainage_type):
@@ -171,6 +171,7 @@ with col_c:
         "Précipitation (mm/an)", min_value=0, value=300, step=50
     )
     climate = get_climate(precipitation)
+    st.info(f"Climat retenu: **{climate}**")
 with col_d:
     water_table = st.number_input(
         "Profondeur nappe (m)", min_value=0.0, value=1.5, step=0.1
@@ -202,6 +203,7 @@ rtr_options = [
 ]
 rtr_class = st.selectbox("Classification RTR", rtr_options, index=6)
 soil_cat = get_soil_category(rtr_class)
+st.info(f"Catégorie de sol retenue: **{soil_cat}**")
 
 # --- STEP 4: STRUCTURE TYPE & DYNAMIC MATERIAL ---
 st.header("4. Structure")
